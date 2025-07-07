@@ -84,7 +84,9 @@ def handle_requests():
                 raise Exception("Failed to retrieve initial player info.")
 
             data_before = json.loads(MessageToJson(before))
+            print(data_before)
             before_like = int(data_before.get("AccountInfo", {}).get("Likes", 0))
+            player_region = str(data_before.get("AccountInfo", {}).get("region", ""))
 
             url = config["url"]
             asyncio.run(send_multiple_requests(uid, region, url, tokens))
@@ -94,8 +96,8 @@ def handle_requests():
                 raise Exception("Failed to retrieve player info after like requests.")
 
             data_after = json.loads(MessageToJson(after))
-            after_like = int(data_after.get("AccountInfo", {}).get("Likes", 0))
             player_uid = int(data_after.get("AccountInfo", {}).get("UID", 0))
+            after_like = int(data_after.get("AccountInfo", {}).get("Likes", 0))
             player_name = str(data_after.get("AccountInfo", {}).get("PlayerNickname", ""))
             like_given = after_like - before_like
             status = 1 if like_given != 0 else 2
@@ -117,12 +119,13 @@ def handle_requests():
                 "message": "Like operation successful" if status == 1 else "No likes added",
                 "player": {
                     "uid": player_uid,
-                    "nickname": player_name,
+                    "region" : player_region,
+                    "nickname": player_name
                 },
                 "likes": {
                     "before": before_like,
                     "after": after_like,
-                    "added_by_api": like_given,
+                    "added_by_api": like_given
                 },
                 "success_count": success_count,
                 "token_collection_used": config["tokens"],
