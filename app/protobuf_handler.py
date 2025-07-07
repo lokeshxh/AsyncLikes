@@ -15,7 +15,7 @@ def create_like_protobuf(user_id, region):
 def create_uid_protobuf(uid):
     try:
         message = uid_generator_pb2.uid_generator()
-        message.saturn_ = int(uid)
+        message.lokesh_ = int(uid)
         message.garena = 1
         return message.SerializeToString()
     except Exception:
