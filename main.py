@@ -84,7 +84,6 @@ def handle_requests():
                 raise Exception("Failed to retrieve initial player info.")
 
             data_before = json.loads(MessageToJson(before))
-            print(data_before)
             before_like = int(data_before.get("AccountInfo", {}).get("Likes", 0))
             player_region = str(data_before.get("AccountInfo", {}).get("region", ""))
 
