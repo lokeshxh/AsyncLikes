@@ -11,7 +11,7 @@ import secrets
 app = Flask(__name__)
 
 # MongoDB init
-client = MongoClient("mongodb+srv://xpertdev:eE2g9lcdACyoifcf@xpert.sz91i4v.mongodb.net/?retryWrites=true&w=majority&appName=xpert")  # Replace with actual Mongo URI
+client = MongoClient("")  # Replace with actual Mongo URI
 db = client["bot_xpert"]
 collection = db["token_state"]
 
